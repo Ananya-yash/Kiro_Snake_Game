@@ -1,0 +1,375 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+:root {
+  --neon-green: #00ff00;
+  --neon-yellow: #ffff00;
+  --neon-magenta: #ff00ff;
+  --neon-cyan: #00ffff;
+  --dark-bg: #0a0a0a;
+  --grid-lines: #1a1a3e;
+  --text-glow: #ffffff;
+  --difficulty-beginner: #00ff88;
+  --difficulty-moderate: #ffaa00;
+  --difficulty-extreme: #ff0044;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Orbitron', monospace;
+  background: var(--dark-bg);
+  color: var(--text-glow);
+  min-height: 100vh;
+  margin: 0;
+  padding: 15px;
+  background-image: 
+    radial-gradient(circle at 25% 25%, #1a0033 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, #001a33 0%, transparent 50%);
+}
+
+#app {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.game-layout {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.game-container {
+  position: relative;
+  display: inline-block;
+}
+
+.score-sidebar {
+  width: 300px;
+  background: rgba(10, 10, 10, 0.9);
+  border: 2px solid var(--neon-cyan);
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 
+    0 0 20px var(--neon-cyan),
+    inset 0 0 20px rgba(0, 255, 255, 0.1);
+  height: fit-content;
+}
+
+.score-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.score-title {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px var(--neon-cyan);
+  font-size: 1.5rem;
+  margin: 0;
+  letter-spacing: 0.2em;
+}
+
+.score-section {
+  margin-bottom: 30px;
+  padding: 15px;
+  border-radius: 8px;
+  background: rgba(26, 26, 62, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.player-section {
+  border-left: 4px solid var(--neon-green);
+}
+
+.ai-section {
+  border-left: 4px solid var(--neon-yellow);
+}
+
+.score-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+}
+
+.player-section .score-label {
+  color: var(--neon-green);
+  text-shadow: 0 0 5px var(--neon-green);
+}
+
+.ai-section .score-label {
+  color: var(--neon-yellow);
+  text-shadow: 0 0 5px var(--neon-yellow);
+}
+
+.score-value {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--text-glow);
+  text-shadow: 0 0 10px var(--text-glow);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.score-details {
+  margin-top: 15px;
+}
+
+.length-display {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.score-bar-container {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.score-bar {
+  height: 100%;
+  width: 0%;
+  border-radius: 4px;
+  transition: width 0.5s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.player-bar {
+  background: linear-gradient(90deg, var(--neon-green), #00ff88);
+  box-shadow: 0 0 10px var(--neon-green);
+}
+
+.ai-bar {
+  background: linear-gradient(90deg, var(--neon-yellow), #ffff88);
+  box-shadow: 0 0 10px var(--neon-yellow);
+}
+
+.score-stats {
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.stat-label {
+  color: #aaa;
+}
+
+.stat-value {
+  color: var(--text-glow);
+  font-weight: 700;
+}
+
+.neon-title {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--neon-cyan);
+  text-shadow: 
+    0 0 5px var(--neon-cyan),
+    0 0 10px var(--neon-cyan),
+    0 0 20px var(--neon-cyan),
+    0 0 40px var(--neon-cyan);
+  margin-bottom: 30px;
+  letter-spacing: 0.2em;
+  text-align: center;
+}
+
+.game-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Remove old score display styles */
+.score-display {
+  display: none;
+}
+
+.player-score, .ai-score {
+  display: none;
+}
+
+.label {
+  display: none;
+}
+
+.score {
+  display: none;
+}
+
+.length {
+  display: none;
+}
+
+.game-container {
+  position: relative;
+  display: inline-block;
+  margin: 20px 0;
+}
+
+#gameCanvas {
+  border: 3px solid var(--neon-cyan);
+  border-radius: 8px;
+  box-shadow: 
+    0 0 25px var(--neon-cyan),
+    inset 0 0 25px rgba(0, 255, 255, 0.1);
+  background: var(--dark-bg);
+  display: block;
+}
+
+.game-status {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--neon-magenta);
+  text-shadow: 
+    0 0 10px var(--neon-magenta),
+    0 0 20px var(--neon-magenta);
+  background: rgba(10, 10, 10, 0.8);
+  padding: 20px 40px;
+  border: 2px solid var(--neon-magenta);
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.game-status.visible {
+  opacity: 1;
+}
+
+.game-controls {
+  margin-top: 20px;
+}
+
+.controls-info {
+  color: #888;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.controls-info p {
+  margin: 5px 0;
+}
+
+/* Neon glow animations */
+@keyframes neon-pulse {
+  0%, 100% {
+    text-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 40px currentColor;
+  }
+  50% {
+    text-shadow: 
+      0 0 2px currentColor,
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 20px currentColor;
+  }
+}
+
+@keyframes score-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.neon-title {
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+
+.score-pulse {
+  animation: score-pulse 0.3s ease-out;
+}
+
+/* Responsive design */
+@media (max-width: 1100px) {
+  .game-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .score-sidebar {
+    width: 100%;
+    max-width: 600px;
+    order: -1;
+  }
+  
+  .score-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+  }
+  
+  .score-details {
+    margin-top: 0;
+    margin-left: 20px;
+    flex: 1;
+  }
+  
+  .score-value {
+    font-size: 1.8rem;
+    margin-bottom: 0;
+    text-align: left;
+  }
+}
+
+@media (max-width: 700px) {
+  .neon-title {
+    font-size: 2rem;
+  }
+  
+  #gameCanvas {
+    width: 90vw;
+    height: 90vw;
+    max-width: 500px;
+    max-height: 500px;
+  }
+  
+  .score-sidebar {
+    padding: 15px;
+  }
+  
+  .score-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .score-details {
+    margin-left: 0;
+    margin-top: 10px;
+    width: 100%;
+  }
+  
+  .game-layout {
+    gap: 20px;
+  }
+}
