@@ -1,6 +1,6 @@
 import { Position, Direction } from './types.js';
 import { GameGrid } from './grid.js';
-
+import { Snake } from './snake.js'; // adjust the import path as necessary
 export interface PathNode {
   position: Position;
   parent: PathNode | null;
